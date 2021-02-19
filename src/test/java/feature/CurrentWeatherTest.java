@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Epic("Weather Service")
 @Jira(id = "Jira-321", title = "Current weather data")
@@ -37,8 +37,9 @@ public class CurrentWeatherTest {
                 .log().all()
                 .extract().response();
         String cityName = response.getBody().jsonPath().getString("name");
-        assertThat("Incorrect city name", cityName.equals(city));
+        assertEquals(cityName, city);
     }
+
     @Test
     void getCurrentWeatherForChicago(){
         /*
@@ -64,7 +65,7 @@ public class CurrentWeatherTest {
                 .log().all()
                 .extract().response();
         String cityName = response.getBody().jsonPath().getString("name");
-        assertThat("Incorrect city name", cityName.equals(city));
+        assertEquals(cityName, city);
     }
 
     @Test
